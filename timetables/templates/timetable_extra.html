@@ -1,0 +1,83 @@
+  
+  <!-- izberi class izmene -->
+  <div class="modal fade" id="modal-choice">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+    
+        <div class="modal-header">
+          <h4 class="modal-title">Izberi</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <div class="modal-body">
+        	<div class="row text-center" style="margin:0 5px;" >
+
+          <div class="yes col-sm-4" data-class="y">
+              <i class="far fa-check-circle" style="margin: 3vh;"></i>
+          </div>
+
+        <div class="maybe col-sm-4" data-class="m">
+            <i class="far fa-question-circle" style="margin: 3vh;"></i>
+        </div>
+
+          <div class="no col-sm-4" data-class="n">
+              <i class="far fa-times-circle" style="margin: 3vh;"></i>
+          </div>
+                  
+  			</div>
+
+        <div class="container load-statuses-container mt-3">
+            <div class="list-group container">
+                <div class="clearfix split-items load-statuses mx-3 text-center">
+                </div>
+            </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- absent modal -->
+  <div class="modal fade" id="modal-absent" data-day-id="">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title modal-absent-title"></h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+
+          <div class="row text-center m-2" >
+          <div class="no-absent col-sm-12" id="absents-button" data-status="n" >
+              <i class="far fa-times-circle" style="margin: 3vh;"></i>
+          </div>
+                  
+          </div>
+            <!-- Absent uporabniki-->
+        <div class="container load-absents-container mt-3">
+            <div class="list-group container">
+                <div class="clearfix split-items load-absents mx-3 text-center">
+                </div>
+            </div>
+        </div>
+
+        </div>
+        
+
+      </div>
+    </div>
+  </div>
+
+<!-- tukej so shranjeni podatki o atributih #data diva -->
+<div id="data" class="mb-4">
+  <input type="hidden" class="context" id=""/>
+    <button type="button" class="btn btn-secondary btn-m" id="PDF pdfy-button">Prenesi&nbsp;<i class="fa fa-file" aria-hidden="true"></i></button>
+    <button type="button" class="btn btn-info btn-md ml-3" id="done" onclick="location.href = 'check';">Kon&ccaron;ano</button>
+</div>
+
+<div id="error" class="alert alert-danger text-center p-4">Error</div>
+<div id="success" class="alert alert-success text-center p-4">Success</div>

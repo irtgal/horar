@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no user-scalable=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>&Scaron;ihti - {{ group }}</title>
+
+{% load static %}
+
+
+
+
+
+  <link rel="stylesheet" href="{% static 'timetables.css' %}">
+
+  <script src="https://kit.fontawesome.com/c76b2f6769.js" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+
+{% block head %}{% endblock %}
+
+</head>
+
+<body>
+
+    {% include 'navbar.html' %}
+    
+<div id="div-body">
+
+<input type="hidden" id="group" value="{{ group.id }}"/>
+
+
+<div class="container">
+<div class="row">
+
+
+<div class="col-sm-6 mb-4">
+  {% if finnished %}
+  <button type="button" onclick="location.href = 'urnik/';" class=" bg-green w-100 urniki-button" id="urniki-button"  data-toggle="tooltip" data-placement="top" title="Končan urnik" >
+	  <h2 class="mt-2 mb-0"><strong>Urnik</strong></h2><small class="mt-0"><strong>{{ group.get_first_day }} - {{ group.get_last_day }}</strong></small>
+  </button>
+  {% else %}
+  <button type="button" data-toggle="tooltip" data-placement="top" title="Nedokončan urnik" onclick="location.href = 'urnik/';" class="bg-orange w-100 urniki-button" id="urniki-button">
+	  <h2 class="mt-2
+	   mb-0"><strong>Urnik</strong></h2><small class="mt-0"><strong>{{ group.get_first_day }} - {{ group.get_last_day }}</strong></small>
+  </button>
+  {% endif %} 
+</div>     
+
+<!-- Sporočila -->
+<div class="col-sm-6">
+  <div class="h1-group">
+    <h2 class="text-center">Sporočila</h2>
+  </div>
+
+    {% for message in messages %}    
+    <div class="alert fade show p-1 m-2 pl-2 {% if message.user.username == administrator %}alert-warning{% else %} alert-info{% endif %} overflow-auto" role="alert">  
+      <p class="text-muted m-0 p-0"><small>{{ message.date }}</small></p>
+      {{ message.text }}
+      <p><strong>- {{ message.user }}</strong></p>
+    </div>
+    {% endfor %}
+  
+  <div class="input-group mx-2 mt-3 mb-0" id="messages-div">
+  <input type="text" class="form-control" id="messages-input" placeholder="Vpiši.." aria-label="message" >  
+  <div class="input-group-append mr-3">
+    <button class="btn btn-info text-white" id="messages-submit" type="button">Pošlji</button>
+  </div>
+  </div>
+
+{% if all_messages %}
+<div class="text-center"><a class="" href="/urniki/{{ group.id}}/"><i class="fas fa-caret-up text-center" id="messages-more"></i></a></div>
+{% else %}
+<div class="text-center"><a class="" href="/urniki/{{ group.id}}/?all_messages=true"><i class="fas fa-caret-down text-center" id="messages-more"></i></a></div>
+{% endif %}
+
+ </div>  
+
+<div class="col-sm-12 mt-4">
+  <div class="h1-group">
+    <h2 class="text-center">Ekipa</h2>
+  </div>
+  <div class="user-list-grid text-center m-0">
+    <span class="alert-warning m-1">{{ administrator }}</span>
+      {% for user in users %}
+        {% if user.username != administrator %}
+          <span class="alert-info m-1">{{ user }}</span>
+        {% endif %}
+     {% endfor %}
+  </div>
+</div>
+
+</div>
+</div>
+
+
+{% csrf_token %}
+
+</div>
+
+
+<div id="error" class="alert alert-danger text-center p-4">Error</div>
+
+<!-- footer -->
+<footer class="page-footer font-small mt-5" id="footer">
+  <div class="footer-copyright text-center py-3 text-gray"><b>&Scaron;ihti 2020</b>
+  </div>
+</footer>
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- timetables.js -->
+<script src="{% static 'timetables.js' %}"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>

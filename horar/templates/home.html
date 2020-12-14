@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="sihti, urniki, studentski urniki, izdelava urnikov">
+  <meta name="author" content="">
+
+  <title>&Scaron;ihti</title>
+
+{% load static %}
+
+
+
+
+
+  <link rel="stylesheet" href="{% static 'timetables.css' %}">
+  <!-- fontawesome icons -->
+  <script src="https://kit.fontawesome.com/c76b2f6769.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+
+<div id="div-body">
+	<div class="container">
+		<div class="row">
+      <div class="col-md-9 mt-3">
+		<div class="card border-info">
+            <h5 class="card-header text-center">Zakaj gre?</h5>
+            <div class="card-body">
+	            <p class="card-text text-center"><strong>Šihti je spletna aplikacija za izdelavo urnikov za študentska dela.</strong></p>
+	            <p>Zaradi dinamične narave študentskega življenja, je urnike za delo potrebno
+                izdelovati praktično vsak teden, saj Luka ne ve, kdaj gre čez dva tedna žurat in Tina ne ve, kdaj bo mogla spet pobirat krompir. Zato se študentske urnike izdeluje na časovno potratnih
+                tedenskih sestankih ali pa s pošiljanjem tedenskih SMS sporočil, katere mora delodajalec nerodno sestaviti v urnik. Aplikacija Šihti je poskus rešitve tega problema. </p>
+			</div>
+		</div>
+
+		<div class="card border-success mt-3 text-center">
+            <h5 class="card-header">Kako deluje?</h5>
+            <div class="card-body">
+	            <p>Ko administrator objavi urnik, študent klikne na <strong>izmeno</strong> in označi kdaj lahko in kdaj ne more delati. Izbira med
+		            <strong class="text-success">lahko pridem</strong>, <strong class="text-warning">pridem, če nihče drug ne more</strong>, ter <strong class="text-danger">ne morem priti</strong>.</p>
+	            <p>S klikom na <strong>dan</strong>, lahko  študent označi odstotnost za cel dan. Planiranje odsotnosti je možno tudi vnaprej.</p>
+	            <p>Urnik končno uredi in zaključi administrator.</p>
+	            <a href="/urniki/prijava/" class="text-info">Preizkusi</a>
+            </div>
+		</div>
+      </div>
+
+		<div class="col-md-3">
+		<div class="card border-secondary my-3">
+            <h5 class="card-header text-center">Tehnologije</h5>
+            <div class="card-body text-center">
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item">Python<strong class="text-success">+</strong>Django</li>
+				  <li class="list-group-item">Javascript<strong class="text-success">+</strong>JQuery<strong class="text-success">+</strong>Ajax</li>
+				  <li class="list-group-item">CSS<strong class="text-success">+</strong>Bootstrap</li>
+				  <li class="list-group-item">HTML</li>
+					<li class="list-group-item">
+						<i class="fab fa-github clickable" data-href="https://github.com/irtgal/sihti" style="font-size: 30px;"></i>
+					</li>
+				</ul>
+            </div>
+		</div>
+		</div>
+
+		</div>
+		</div>
+</div>
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- timetables.js -->
+<script src="{% static 'timetables.js' %}"></script>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+
+
+</body>
+
+</html>

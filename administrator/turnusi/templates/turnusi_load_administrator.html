@@ -1,0 +1,35 @@
+
+{% load custom_tags %}
+
+
+<div class="table-responsive mt-5">
+<table class="table" style="width:100%;">
+
+<tbody>
+<tr class="">
+  <td colspan="2" style="width: 15%;"><div class="text-center"><b>Dan</b></div></td>
+  <td colspan="12"><div class="text-center"><b>Izmene</b></div></td>
+</tr>
+
+{% for d,day in day_choices %}
+<tr class="date">
+  <td colspan="2" class="text-center day-td table-active" id="{{ day }}" data-toggle="tooltip" data-placement="right" title="Dodaj izmeno">{{day}}</i>
+  </td>
+  {% for shift in d|find_turnusshifts:current.id %}
+  <td colspan class="{{ shift.shift_class }} {% if not shift.employee %} a {% endif %} text-center shift"
+    data-class="{{ shift.shift_class }}" data-date="{{ date |date:'Y-m-d' }}" data-id="{{ shift.id }}" data-start="{{ shift.start|date:'H:i' }}" data-end="{{ shift.end|date:'H:i' }}" data-employee="{{ shift.employee}}" id="{{ shift.id }}">
+    {{ shift.employee|default:"" }} <small>{{ shift.start|date:"H:i" }} - {{ shift.end|date:"H:i" }}</small>
+</td>
+
+    {% endfor %}
+
+</tr>
+
+{% endfor %}
+
+
+
+
+</tbody>
+</table>
+</div>

@@ -1,0 +1,1 @@
+web: gunicorn horar.wsgi --log-file -

@@ -1,0 +1,147 @@
+ <!-- uredi ali ustvari izmeno modal -->
+  <div class="modal fade" id="modal-edit-shift">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h4 class="modal-title" id="title-modal-edit-shift">Uredi</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <div class="modal-body container">
+        <form id="form-edit-shift" method="post" action="shift_manage/" data-shift="">
+          {% csrf_token %}
+          <input type="hidden" name="id" id="id" value="" />
+          <input type="hidden" name="date" id="date" value="" />
+          <div class="form-row">
+            <div class="col">
+              <label class="col-form-label">Od:</label>
+              <input type="time" class="form-control" id="edit-from" name="edit-from" placeholder="Ura"  required>
+            </div>
+          <div class="col">
+             <label class="col-form-label">Do:</label>
+             <input type="time" class="form-control" id="edit-to" name="edit-to" placeholder="Ura" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="select-user">Zaposleni:</label>
+          <select class="form-control" id="select-user" name="select-user">
+			<option value="-1" class="d-none current-user"></option>
+            <option value="0">Prazno</option>
+            {% for user in users %}
+            <option value="{{ user.id }}">{{ user }}</option>
+            {% endfor %}
+         </select>
+        </div>
+
+        <div class="container load-statuses-container my-4">
+            <div class="list-group container">
+                <div class="clearfix split-items load-statuses mx-3 text-center">
+                </div>
+            </div>
+        </div>
+
+
+        <button type="submit" class="btn btn-success float-right" >Shrani</button>
+        <button type="button" class="btn btn-danger float-left" id="shift-remove" >Izbriši izmeno</button>
+      </form>
+            <!-- Absent uporabniki-->
+        <div class="container load-absents-container">
+            <div class="list-group container">
+                <div class="clearfix split-items load-absents mx-3 text-center">
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- Ustvari urnik  -->
+  <div class="modal fade" id="timetable-add-modal">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h4 class="modal-title text-center">Ustvari nov urnik</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+      <form method="POST" id="timetable-add-form" action="/administrator/{{ group.id }}/urnik/dodaj">
+        <input type="hidden" name="turnus-id" id="turnus-id">
+        <div class="modal-body mx-1">
+
+        <div id="turnus-picker-row" class="row text-center">
+            {% for turnus in turnuses %}
+          <div class="col-sm-12 turnus-picker-el bg-info mb-1" data-id="{{ turnus.id }}">
+
+            <a class="p-2"><strong>{{ turnus.name }}</strong></a>
+          </div>
+            {% endfor %}
+
+          <div class="col-sm-12 turnus-picker-el bg-success mb-0" data-id="">
+            <a class="p-2"><strong>Ustvari nov urnik<i class="fa fa-plus pl-2" aria-hidden="true"></i></strong></a>
+          </div>
+
+        </div>
+
+        <!-- izbira datuma -->
+        <div id="date-picker-row" style="display: none;">
+            <div class="m-2 text-center">
+              <label for="start_date" class="text-info m-0"><small>Datum začetka</small></label>
+              <input type="date" class="m-auto" name="start_date" id="start_date"  required/>
+            </div>
+
+            <div class="m-2 text-center text-light">
+              <label for="end_date" class="text-info m-0"><small>Datum konca</small></label>
+              <input type="date" name="end_date" id="end_date"  required/>
+            </div>
+
+            <div class="m-2 mt-3 text-center">
+              <button type="submit" class="btn btn-success" id="timetable-add-submit">Naprej</button>
+            </div>
+        </div>
+
+            {% csrf_token %}
+        </div>
+    </form>
+
+
+      </div>
+        </div>
+        </div>
+
+
+<!-- modal potrdi -->
+  <div class="modal fade" id="modal-confirm">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-confirm-title">Ali ste prepričani?</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="modal-btn-cancel" onclick="$('#modal-confirm').modal('hide');">Razveljavi</button>
+
+          <form name="form-confirm" id="form-confirm" method="post">
+            {% csrf_token %}
+            <input type="hidden" id="user"  name="user"/>
+            <input type="hidden" id="start"  name="start_date"/>
+            <input type="hidden" id="end"  name="end_date"/>
+          <button type="submit" class="btn btn-danger" id="modal-btn-confirm">Potrdi</button>
+          </form>
+
+      </div>
+
+        </div>
+        </div>
+      </div>
+
+
+
+<div id="error" class="alert alert-danger text-center p-4">Error</div>
+<div id="success" class="alert alert-success text-center p-4">Success</div>

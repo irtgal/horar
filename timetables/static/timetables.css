@@ -1,0 +1,282 @@
+#div-body {
+	margin: 2% 12%;
+}
+#footer {
+  border-top: 1px #d2d2d2 solid;
+}
+.input-table {
+	width: 100%;
+}
+#error, #success {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 7000;
+    font-weight: bold;
+    display: none;
+}
+/*lahko izbrišem ? */
+#flex-nav {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.nav-back {
+  flex: 1;
+  cursor: pointer;
+}
+.title{
+  flex: 3;
+  text-align: center;
+}
+.profile {
+  flex: 1;
+}
+.text-25{
+  font-size: 25px;
+}
+.yes, .yes-absent {
+	background-color: rgb(195, 230, 203);
+	border-radius: 8px 0 0 8px;
+}
+.no {
+	background-color: #DC3545;
+	border-radius: 0 8px 8px 0;
+}
+.no-absent {
+	background-color: #DC3545;
+	border-radius: 8px;
+}
+.maybe, .m, .maybe-absent {
+	background-color: rgb(255, 238, 186);
+}
+
+.shift {
+	border-left: 2px solid #FFFFFF;
+	border-bottom: 1.5px solid #FFFFFF;
+}
+
+.grey {
+	color: #A0A0A0;
+}
+.yes:hover, .y:hover, .maybe:hover, .m:hover, .no:hover, .yes-absent:hover, .no-absent:hover, .maybe-absent:hover {
+	filter: brightness(90%);
+	cursor: pointer;
+}
+.shift:hover {
+     cursor: pointer;
+}
+.a:hover {
+	background-color: #f2f2f2;
+	cursor: pointer;
+}
+
+.y {
+	background-color: rgb(195, 230, 203);
+}
+.y:hover {
+	cursor: pointer;
+}
+.h1-group {
+    border-bottom: 2px solid rgb(210,210,210);
+    margin-bottom: 20px;
+}
+
+.tr-timetable:hover {
+	background-color: #e8fafc;
+	cursor: pointer;
+}
+.timetable_delete:hover {
+	filter: brightness(50%);
+}
+.delete-timetable:hover {
+	filter: brightness(50%);
+	cursor: pointer;
+}
+#modal-confirm {
+	filter: brightness(100%);
+}
+.status:nth-child(odd) {
+	border-left: 2px white solid;
+}
+.back{
+	cursor: pointer;
+}
+  #data {
+  	text-align: right;
+  }
+.warning {
+  margin:auto;
+  padding: 5px;
+  border: 3px solid #f0ad4e;
+  border-radius: 5px;
+  overflow: hidden;
+}
+#messages-more, #load-up, #load-down {
+  font-size: 70px;
+  color:rgb(180,180,180);
+  cursor: pointer;
+}
+#messages-more:hover, #load-up:hover, #load-down:hover {
+  color: rgb(200,200,200);
+}
+.day-td:hover {
+  cursor: pointer;
+  background-color: #f2f2f2;
+ }
+#urniki-button {
+  margin-top: 3rem;
+  color: white;
+  border: none;
+  height: 200px;
+
+}
+#urniki-button:hover {
+   filter: brightness(90%);  
+   cursor: pointer;
+   border: none;
+}
+.co-blue {
+  color: #5bc0de;
+}
+.text-gray {
+  color: rgb(210,210,210);
+}
+.bg-blue {
+  background-color: #6bc5e1;
+}
+.box-admin {
+    background-color:#f5c88a;  
+}
+.box-user {
+  background-color: #9acffe;
+}
+.bg-blue {
+  background-color:  #9acffe;
+}
+.bg-green {
+  background-color: #a6d8a6;
+}
+.bg-orange {
+  background-color: #f5c88a;
+}
+.box-user {
+  width: 48%;
+  margin: 1%;
+  float: left;
+}
+.box-user, a {
+  margin: 10px;
+}
+.login-container {
+    width: 50vh;
+    margin: auto;
+}
+#logout {
+  font-size: 50px;
+  cursor: pointer;
+  color: #df706d;
+}
+#flex-profile {
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+@media only screen and (max-width: 600px) {
+  #div-body {
+  	margin: 2% 2%;
+  }
+  #urniki-button {
+    margin-top: 25px;
+  }
+  .yes{
+  	border-radius: 8px 8px 0 0;
+  	background-color: #C3E6CB;
+  }
+  .no {
+  	border-radius: 0 0 8px 8px;
+  }
+  .yes-absent, .no-absent {
+    border-radius: 8px;
+  }
+
+  #data {
+  	text-align: center;
+  }
+.login-container {
+    width: 80%;
+    margin: auto;
+}
+}
+.bt-1 {
+    border-top: 1px solid white;
+}
+.nav-li2 {
+	border-left:3px solid grey;
+
+}
+
+/* za extra.html */
+.list-group-item.left-side,
+.list-group-item.right-side {
+  margin: 0 0 -1px;
+  float: left;
+  width: 50%;
+  border-bottom-width:0px;
+  text-color
+  
+}
+
+.split-items .list-group-item.left-side{
+  border-top-right-radius:0px;
+  border-bottom-right-radius:0px;
+}
+
+.split-items .list-group-item.right-side{
+  border-top-left-radius:0px;
+  border-bottom-left-radius:0px;
+  border-bottom-right-radius:0px;
+  border-top-right-radius:4px;
+  border-left: 0;
+}
+
+#reset {
+  position: fixed;
+  top: 50%;
+  right: 5%;
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 4.5vh;
+  color: #6bc5e1;
+}
+#reset:hover {
+  color: #9acffe;
+  cursor: pointer;
+}
+.user-list-grid {
+  display: grid;
+  grid-template-columns: auto auto;
+  
+}
+.card-id {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  padding-top: 1px;
+  text-align: center;
+}
+.mt-05 {
+    margin-top: 2px;
+}
+.clickable:hover {
+    cursor: pointer;
+    filter: brightness(90%);
+
+}
+.hoverable:hover {
+    cursor: pointer;
+    filter: brightness(90%);
+}
+/* fonts*/
+h1 { font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif; font-size: 24px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 26.4px; } h3 { font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 15.4px; } p { font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 20px; } blockquote { font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif; font-size: 21px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 30px; } a, td { font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif; font-size: 16px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 18.5714px; }

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>&Scaron;ihti - {{ user }}</title>
+
+{% load static %}
+
+
+
+
+
+  <link rel="stylesheet" href="{% static 'timetables.css' %}">
+  <!-- fontawesome icons -->
+  <script src="https://kit.fontawesome.com/c76b2f6769.js" crossorigin="anonymous"></script>
+
+
+
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+
+<div id="div-body">
+  <div class="container">
+    <div class="h1-group w-100 mt-4 text-center">
+       <h2><strong>{{ user }}</strong></h2>
+    </div>
+
+      <div class="row">
+      <div class="col-sm-3">
+	      <h5 class="text-center text-muted">ID</h5>
+        <div class="alert alert-warning text-center mb-3" role="alert">
+            <a href="/urniki/{{ group.id }}/" class="text-warning"><strong>{{ user.id }}</strong></a>
+        </div>
+      </div>
+
+
+    <div class="col-sm-9">
+{% if groups %}
+	<h5 class="text-center  text-muted">Skupine</h5>
+{% endif %}
+
+{% for group in groups %}
+	    {% if user == group.administrator.user %}
+        <div class="alert alert-success text-center mb-3 clickable" role="alert" data-href="/administrator/{{ group.id }}/"/>
+            <strong>{{ group }}</strong>
+        </div>
+	    {% else %}
+        <div class="alert alert-success text-center mb-3 clickable" role="alert" data-href="/urniki/{{ group.id }}/"/>
+            <strong>{{ group }}</strong>
+        </div>
+		{% endif %}
+{% endfor %}
+    </div>
+
+   </div>
+
+
+      <div id="div-logout" class="mt-4 text-center" ><i class="fas fa-sign-out-alt clickable" data-href="/urniki/odjava/" id="logout"></i></div>
+    </div>
+  </div>
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- timetables.js -->
+<script src="{% static 'timetables.js' %}"></script>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>

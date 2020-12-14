@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Urnik</title>
+</head>
+<body>
+
+  <h1 class="text-center"> Urnik</h1>
+
+
+
+
+<div class="table-responsive">
+<table class="table" style="width:100%;">
+
+<tbody>
+<tr>
+  <td colspan="2" style="width: 15%;"><div class="text-center">Dan</div></td>
+  <td colspan="12"><div class="text-center">Izmene</div></td>
+</tr>
+
+{% for date, times in data.items %}
+<tr class="date">
+	
+  <td colspan="2" class="table-active">{{ date|date:"D, j.n"  }}</td>
+
+  {% for id, shift in times.items %}
+  <td colspan class="text-center schedule {{ shift.3 }} {% if shift.2 == user.username %} mine {% endif %}{% if not shift.2 %} a {% endif %}"
+    data-class="{{ shift.3 }}" data-date="{{ date |date:'Y-m-d' }}" data-id="{{ id }}">{{ shift.2 }} <small>{{ shift.0|date:"H:i" }} - {{ shift.1|date:"H:i" }}</small></td>  
+    {% endfor %}
+
+</tr>
+{% endfor %}
+
+</tbody></table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no user-scalable=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>&Scaron;ihti - Turnusi</title>
+
+{% load static %}
+
+  <link rel="stylesheet" href="{% static 'timetables.css' %}">
+   <link rel="stylesheet" href="{% static 'administrator.css' %}">
+  <!-- fontawesome icons -->
+  <script src="https://kit.fontawesome.com/c76b2f6769.js" crossorigin="anonymous"></script>
+
+{% block head %}{% endblock %}
+
+</head>
+
+<body>
+    {% include 'navbar_administrator.html' %}
+    
+<div id="div-body">
+	<input type="hidden" id="url" />
+  <input type="hidden" id="group" value="{{ group.id }}" />
+{% csrf_token %}
+
+<div id="turnusi-flex">
+	{% if turnusi %}
+  {% for turnus in turnusi %}
+    <div class="{% if turnus.id == current.id %}bg-success{% else %}bg-secondary{% endif %} text-white turnus py-3 clickable"
+         data-href="/administrator/{{ group.id }}/turnusi/{{ turnus.id }}/">
+      <b>{{ turnus.name }}</b>
+    </div>
+    {% endfor %}
+	{% endif %}
+ <div id="turnus-add" class="bg-info text-white hoverable py-3 px-3" data-toggle="modal" data-target="#turnus-add-modal">
+    <b><i class="fa fa-plus" aria-hidden="true"></i></b>
+  </div>
+
+</div>
+
+{% if turnusi %}
+{% include 'turnusi_load_administrator.html' %}
+<div class="btns-flex mt-4">
+
+<span>
+<button type="button" class="btn btn-danger clickable" data-href="/administrator/{{group.id}}/turnusi/{{current.id}}/turnus_remove/">
+	Izbriši  <i class="fa fa-trash" aria-hidden="true"></i>
+</button>
+</span>
+<span class="timetable-btn text-right">
+<button type="button" class="btn btn-info clickable" data-href="/administrator/{{group.id}}/">Končano</button>
+</span>
+{% else %}
+<h3 class="text-info text-center mt-5"><strong>Dodajte nov turnus</strong></h3>
+{% endif %}
+
+</div>
+
+
+<!-- dodaj nov turnus modal -->
+<div class="modal" tabindex="-1" role="dialog" id="turnus-add-modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title  text-center">Dodaj turnus</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <form method="POST" action="turnus_add/" id="turnus-add-form">
+	        {% csrf_token %}
+	        <input type="text" class="form-control" name="turnus-name" placeholder="Ime turnusa.." maxlength="20" required>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" form="turnus-add-form" class="btn btn-success">Ustvari</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include 'timetable_extra_administrator.html' %}
+</div>
+
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+<script src="{% static 'administrator.js' %}"></script>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>

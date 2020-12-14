@@ -1,0 +1,54 @@
+
+<!-- modal potrdi -->
+  <div class="modal fade" id="modal-confirm">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-confirm-title">Ali ste prepričani?</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-danger" id="modal-btn-cancel" onclick="$('#modal-confirm').modal('hide');">Razveljavi</button>
+
+          <form name="form-confirm" id="form-confirm" method="post"> 
+            {% csrf_token %}
+            <input type="hidden" id="employee"  name="employee"/>
+          <button type="submit" class="btn btn-info" id="modal-btn-confirm">Potrdi</button>
+          </form>
+
+      </div>
+
+        </div>
+        </div>        
+      </div>
+
+
+
+<!-- modal dodaj uporabnika -->
+<div class="modal fade" id="modal-user-add" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Vpi&scaron;ite ID novega &ccaron;lana:</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="user-add-form" action="/administrator/{{ group.id }}/user_add" method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <input type="number" class="form-control" name="user_id">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Zapri</button>
+        <button type="submit" form="user-add-form" class="btn btn-primary">Dodaj</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="error" class="alert alert-danger text-center p-4">Error</div>
+<div id="success" class="alert alert-success text-center p-4">Success</div>

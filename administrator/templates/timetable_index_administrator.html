@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no user-scalable=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>&Scaron;ihti - Urnik</title>
+
+{% load static %}
+
+
+
+
+
+  <link rel="stylesheet" href="{% static 'timetables.css' %}">
+   <link rel="stylesheet" href="{% static 'administrator.css' %}"><!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+  <!-- fontawesome icons -->
+  <script src="https://kit.fontawesome.com/c76b2f6769.js" crossorigin="anonymous"></script>
+
+{% block head %}{% endblock %}
+
+</head>
+
+<body>
+    {% include 'navbar_administrator.html' %}
+    
+<div id="div-body">
+	<input type="hidden" id="url" value="/administrator/{{ group.id }}/urnik/" />
+  <input type="hidden" id="group" value="{{ group.id }}" />
+{% csrf_token %}
+
+
+
+{% include 'timetable_load_administrator.html' %}
+
+
+{% if 'load_to' in request.get_full_path %}
+<div id="reset">
+<i class="fas fa-redo-alt"></i>
+</div>
+{% endif %}
+
+<div class="btns-flex mt-4">
+
+<span>
+<button type="button" class="btn btn-success" id="timetable-add-button">Urnik&nbsp;<i class="fa fa-plus" aria-hidden="true"></i></button>
+</span>
+
+<span class="timetable-btn text-center">
+<button type="button" class="btn btn-secondary m-x"  id="pdfy-button" disabled>Prenesi &nbsp;<i class="fa fa-file" aria-hidden="true"></i></button>
+</span>
+
+<span class="timetable-btn text-right">
+<button type="button" class="btn btn-info" id="done" onclick="location.href = 'check';">Kon&ccaron;ano</button>
+</span>
+
+</div>
+
+
+
+
+{% include 'timetable_extra_administrator.html' %}
+</div>
+
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+<script src="{% static 'administrator.js' %}"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+
+{% if scroll %}
+<script type="text/javascript">
+  $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+</script>
+{% endif %}
+
+</body>
+
+</html>
