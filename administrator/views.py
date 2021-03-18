@@ -13,23 +13,15 @@ def group(request, group_id):
 		return render(request, '404.html')
 
 	users = group.users.all()
-	administrator = group.administrator
-
-	all_messages = request.GET.get('all_messages', False)
-
+	administrator = group.administrator.user.username
 	messages = Message.objects.filter(group=group).order_by('-date')
-	if not all_messages:
-		messages = messages[:3]
 
-	finnished = True
-	if group.finnished == False:
-		finnished = None
+	finnished = "finnished" if group.finnished == True else None
 	context = {
 	'users': users,
 	'administrator': administrator,
 	'group': group,
 	'group_id':group_id,
-	'all_messages': all_messages,
 	'finnished': finnished,
 	'messages': messages,
 	}

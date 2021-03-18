@@ -6,7 +6,7 @@ from django.shortcuts import redirect
 def check_user(request, group):
     try:
         group.users.get(request.user)
-        return Trie
+        return True
     except:
         return render(request, '404.html')
 
@@ -52,7 +52,7 @@ def update_shift(group, shift):
 
 def get_shift_users(day):
 	shifts = Shift.objects.filter(day=day).order_by('start')
-	context =[ [shift.employee.username, shift.shift_class] if shift.employee else ['', 'a'] for shift in shifts ]
+	context = [ [shift.employee.username, shift.shift_class] if shift.employee else ['', 'a'] for shift in shifts ]
 	return context
 
 

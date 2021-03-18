@@ -43,11 +43,11 @@
 
 <div class="col-sm-6 mb-4">
   {% if finnished %}
-  <button type="button" onclick="location.href = 'urnik/';" class=" bg-green w-100 urniki-button" id="urniki-button"  data-toggle="tooltip" data-placement="top" title="Končan urnik" >
+  <button type="button" onclick="location.href = 'urnik/';" class=" bg-green w-100 urniki-button" id="urniki-button">
 	  <h2 class="mt-2 mb-0"><strong>Urnik</strong></h2><small class="mt-0"><strong>{{ group.get_first_day }} - {{ group.get_last_day }}</strong></small>
   </button>
   {% else %}
-  <button type="button" data-toggle="tooltip" data-placement="top" title="Nedokončan urnik" onclick="location.href = 'urnik/';" class="bg-orange w-100 urniki-button" id="urniki-button">
+  <button type="button" onclick="location.href = 'urnik/';" class="bg-orange w-100 urniki-button" id="urniki-button">
 	  <h2 class="mt-2
 	   mb-0"><strong>Urnik</strong></h2><small class="mt-0"><strong>{{ group.get_first_day }} - {{ group.get_last_day }}</strong></small>
   </button>
@@ -60,26 +60,27 @@
     <h2 class="text-center">Sporočila</h2>
   </div>
 
+  <div id="messages-div">
     {% for message in messages %}    
-    <div class="alert fade show p-1 m-2 pl-2 {% if message.user.username == administrator %}alert-warning{% else %} alert-info{% endif %} overflow-auto" role="alert">  
+    <div class="alert fade show p-1 m-2 pl-2 overflow-auto 
+      {% if message.user.username == administrator %}alert-warning{% else %}alert-info{% endif %} {% if forloop.counter > 3 %}hidden{% endif %}">  
       <p class="text-muted m-0 p-0"><small>{{ message.date }}</small></p>
       {{ message.text }}
       <p><strong>- {{ message.user }}</strong></p>
     </div>
     {% endfor %}
+  </div>
   
-  <div class="input-group mx-2 mt-3 mb-0" id="messages-div">
+  <div class="input-group mx-2 mt-3 mb-0">
   <input type="text" class="form-control" id="messages-input" placeholder="Vpiši.." aria-label="message" >  
   <div class="input-group-append mr-3">
     <button class="btn btn-info text-white" id="messages-submit" type="button">Pošlji</button>
   </div>
   </div>
 
-{% if all_messages %}
-<div class="text-center"><a class="" href="/urniki/{{ group.id}}/"><i class="fas fa-caret-up text-center" id="messages-more"></i></a></div>
-{% else %}
-<div class="text-center"><a class="" href="/urniki/{{ group.id}}/?all_messages=true"><i class="fas fa-caret-down text-center" id="messages-more"></i></a></div>
-{% endif %}
+<div class="text-center">
+    <a  id="toggle-messages"><i class="fas fa-caret-down text-center"></i></a>
+</div>
 
  </div>  
 

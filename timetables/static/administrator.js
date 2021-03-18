@@ -34,9 +34,7 @@ $(".delete-timetable").click(function(){
     $("#start").val(start);
     $("#end").val(end);
   });
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})
+
 $(".url-timetable").click(function(){
   var url = $(this).parent("tr").data("url");
   window.location = url;
@@ -161,6 +159,19 @@ $("#load-down").click(function(){
 
 $("#user-add").click(function(){
   $("#modal-user-add").modal('show');
+});
+
+$("#toggle-messages").on("click", function () {
+  let caret = $(this).find(".fas");
+  let extra_messages = $("#messages-div > .alert").slice(3);
+  if (caret.hasClass("fa-caret-down")) {
+    caret.toggleClass('fa-caret-down fa-caret-up');
+    $(extra_messages).removeClass("hidden");
+  }
+  else {
+    caret.toggleClass('fa-caret-up fa-caret-down');
+    $(extra_messages).addClass("hidden");
+  }
 });
 
 $("#messages-submit").click(function(){

@@ -1,7 +1,5 @@
 
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})
+
 
 var dates = $(".date");
 var i;
@@ -150,7 +148,18 @@ $("#messages-submit").click(function(){
         });
   }
 });
-
+$("#toggle-messages").on("click", function () {
+  let caret = $(this).find(".fas");
+  let extra_messages = $("#messages-div > .alert").slice(3);
+  if (caret.hasClass("fa-caret-down")) {
+    caret.toggleClass('fa-caret-down fa-caret-up');
+    $(extra_messages).removeClass("hidden");
+  }
+  else {
+    caret.toggleClass('fa-caret-up fa-caret-down');
+    $(extra_messages).addClass("hidden");
+  }
+});
 
 $("#modal-edit-schedule").on("hidden.bs.modal", function () {
     $(".load-statuses-container .load-statuses").html("<small class='text-muted'>Nalaganje</small>");

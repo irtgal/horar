@@ -1,6 +1,8 @@
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+from django.core import serializers
+
 
 from .scripts import *
 from .models import *
@@ -38,31 +40,20 @@ def logout_user(request):
 def group_index(request, group_id):
 	group = get_object_or_404(Group, id=group_id)
 	check_user(request, group)
-	administrator = str(group.administrator.user)
-	all_messages = request.GET.get('all_messages', False)
-
-	if all_messages:
-		messages = Message.objects.filter(group=group).order_by('-date')
-	else:
-		messages = Message.objects.filter(group=group).order_by('-date')[:3]
-
-	if group.finnished == True:
-		finnished = "finnished"
-	else:
-		finnished = None
+	administrator = group.administrator.user.username
+	messages = Message.objects.filter(group=group).order_by('-date')
+	finnished = "finnished" if group.finnished == True else None
 	users = group.users.all()
-	context = {'group': group, 'users': users, 'messages': messages, 'administrator': administrator,
-	           'all_messages': all_messages, 'finnished': finnished}
+	context = {'group': group, 'users': users, 'messages': messages, 'administrator': administrator,'finnished': finnished}
 	return render(request, 'group_index.html', context)
 
 
-@login_required()
+@login_required
 def message_add(request, group_id):
 	group = get_object_or_404(Group, id=group_id)
 	check_user(request, group)
 	message = request.GET['message']
 	if 0 < len(message) < 255:
-		print(message)
 		t = Message(user=request.user, text=message, group=group)
 		t.save()
 		return JsonResponse({'success': 'success'})
@@ -127,7 +118,6 @@ def get_status(request, group_id, shift_id):
 	check_user(request, group)
 	shift = get_object_or_404(Shift, id=shift_id)
 	data = json.dumps(order_statuses(group, shift)[0])
-	print(shift, data)
 	return JsonResponse({'statuses': data})
 
 

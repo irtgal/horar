@@ -21,6 +21,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 .nav-back {
   flex: 1;
@@ -32,6 +33,9 @@
 }
 .profile {
   flex: 1;
+}
+.profile .fa-user {
+  font-size: 20px;
 }
 .text-25{
   font-size: 25px;
@@ -113,12 +117,12 @@
   border-radius: 5px;
   overflow: hidden;
 }
-#messages-more, #load-up, #load-down {
+#toggle-messages, #load-up, #load-down {
   font-size: 70px;
   color:rgb(180,180,180);
   cursor: pointer;
 }
-#messages-more:hover, #load-up:hover, #load-down:hover {
+#toggle-messages:hover, #load-up:hover, #load-down:hover {
   color: rgb(200,200,200);
 }
 .day-td:hover {
@@ -160,6 +164,9 @@
 }
 .bg-orange {
   background-color: #f5c88a;
+}
+.hidden {
+  display: none;
 }
 .box-user {
   width: 48%;
