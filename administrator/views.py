@@ -65,12 +65,20 @@ def timetable_administrator(request, group_id):
 	load_to = request.GET.get('load_to', False)
 	load_days = get_days(group, load_to, scroll)
 	turnuses = Turnus.objects.filter(group=group)
+
+	load_direction = None
+	if load_to:
+		first_date = min( (date for date, day  in load_days.items()) )
+		first_current = Day.objects.filter(group=group, current=True).order_by("date")[0]
+		load_direction = "future" if first_current.date <= first_date else "past"
+
 	context = {
 	'group': group,
 	'users': users,
 	'load_days': load_days,
 	'scroll':scroll,
 	'turnuses': turnuses,
+	'load_direction': load_direction
 	}
 	return render(request, 'timetable_index_administrator.html', context)
 

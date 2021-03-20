@@ -127,8 +127,17 @@
   cursor: pointer;
   background-color: #f2f2f2;
  }
- .not-current {
-   color: #da5c58;
+ .day-td {
+   font-weight:600;
+ }
+ .table-active {
+   color: #595959;
+ }
+ .day-past {
+   color:  #da5c58;
+ }
+ .day-future {
+   color: #f1b25b;
  }
 #urniki-button {
   margin-top: 3rem;
@@ -142,8 +151,8 @@
    cursor: pointer;
    border: none;
 }
-.co-blue {
-
+.odd-week {
+  filter: brightness(60%);
 }
 .text-gray {
   color: rgb(210,210,210);

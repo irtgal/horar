@@ -44,17 +44,7 @@ $("#timetable-add-button").click(function(){
   $("#timetable-add-modal").modal("show");
 });
 
-function isNotObsolete(id) {
-  var clicked_date = new Date(id.replace( /(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3"))
-  var last_current = $(".table-active").first().attr('id');
-  var last_current_date = new Date(last_current.replace( /(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3"));
-  if (last_current_date > clicked_date){
-    return false
-  }
-  else {
-    return true
-  }
-}
+
 /* urejanje shifta */
 $(".shift").click(function(){
     $("#shift-remove").css("display", "block");
@@ -65,7 +55,8 @@ $(".shift").click(function(){
     var end = $(this).data("end");
     var id =$(this).data("id");
     var shift_class = $(this).data("class");
-    if (isNotObsolete(date)){
+    var day_td = $(this).parents(".date").find(".day-td")
+    if (!$(day_td).hasClass("day-past")){
         $("#title-modal-edit-shift").html("Uredi " + date);
         $("#date").val(date);
         $("#edit-from").val(start);
@@ -105,7 +96,7 @@ $("#modal-choice").on("hidden.bs.modal", function () {
 });
 $(".day-td").click(function(){
   var date = $(this).attr("id");
-  if (isNotObsolete(date)){
+  if (!$(this).hasClass("day-past")){
   $(".load-statuses").html("");
   $("#date").val(date);
   $("#title-modal-edit-shift").html("Ustvari " + date);

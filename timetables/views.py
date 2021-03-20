@@ -69,10 +69,18 @@ def timetable_index(request, group_id):
 	scroll = request.GET.get('scroll', False)
 	load_to = request.GET.get('load_to', False)
 	load_days = get_days(group, load_to, scroll)
+
+	load_direction = None
+	if load_to:
+		first_date = min( (date for date, day  in load_days.items()) )
+		first_current = Day.objects.filter(group=group, current=True).order_by("date")[0]
+		load_direction = "future" if first_current.date <= first_date else "past"
+		
 	context = {
 		'group': group,
 		'users': users,
 		'load_days': load_days,
+		'load_direction': load_direction,
 		'scroll': scroll,
 	}
 	return render(request, 'timetable_index.html', context)

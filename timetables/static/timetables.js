@@ -14,12 +14,12 @@ for (i = 0; i < dates.length; i++) {
 
 function colorWeeks(e){
     var first_mon = $(".day-td:contains('Mon')")[0].closest(".date");
-    $(first_mon).find(".day-td").addClass("co-blue");
+    $(first_mon).find(".day-td").addClass("odd-week");
     var days = $(first_mon).nextAll();
     var original_len = days.length;
     for (i = 0; i < days.length; i++) {
         if (Math.floor((i+1)/7) % 2 == 0) {
-            $(days[i]).find(".day-td").addClass("co-blue");
+            $(days[i]).find(".day-td").addClass("odd-week");
         }
         delete days[i];
     }
@@ -68,21 +68,12 @@ $(".maybe, .yes, .no").click(function(){
 
 
 });
-function isNotObsolete(id) {
-  var clicked_date = new Date(id.replace( /(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3"))
-  var last_current = $(".table-active").first().attr('id');
-  var last_current_date = new Date(last_current.replace( /(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3"));
-  if (last_current_date > clicked_date){
-    return false
-  }
-  else {
-    return true
-  }
-}
+
 $(".shift").click(function(){
   var id = $(this).data("id");
-  var date = $(this).parents(".date").find(".day-td").attr("id");
-  if (isNotObsolete(date)){
+  var day_td = $(this).parents(".date").find(".day-td")
+  var date = $(day_td).find(".day-td").attr("id");
+  if (!$(day_td).hasClass("day-past")) {
   var group = $("#group").val();
   $(".context").attr("id", id);
 
@@ -164,7 +155,7 @@ $("#modal-edit-schedule").on("hidden.bs.modal", function () {
 
 $(".day-td").click(function(){
   var id = $(this).attr('id');
-  if (isNotObsolete(id)){
+  if (!$(this).hasClass("day-past")){
   var date_nice = $(this).html();
   $(".modal-absent-title").html("Odsotnost na " + date_nice);
   $("#modal-absent").modal("show");

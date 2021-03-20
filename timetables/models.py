@@ -53,6 +53,10 @@ class Day(models.Model):
 
 	def current_remove(self):
 		current = False
+	
+	def is_past(self):
+		last_current = Day.objects.filter(group=self.group, current=True).order_by("-date")[0]
+		return True if self.date < last_current.date else False
 
 
 
@@ -69,6 +73,7 @@ class Shift(models.Model):
 
 	def get_stamp(self):
 		return datetime.datetime.strptime(self.time[:5], '%H:%M').time() > datetime.time(14, 55)
+
 
 class ShiftStatus(models.Model):
 	shift = models.ForeignKey(Shift, on_delete=models.CASCADE, blank=True, null=True, default="")
