@@ -146,6 +146,7 @@ def absent(request, group_id):
 		data = json.dumps(get_shift_users(day))
 
 	return JsonResponse(data, safe=False)
+	
 @login_required
 def get_absent(request, group_id, date):
 	check_user(request, group_id)

@@ -11,7 +11,7 @@
 {% for date, day in load_days.items %}
 <tr class="date">
   <td colspan="2" id="{{ date|date:'Y-m-d'}}" data-day="{{ day.id }}"
-    class="day-td day-{{ day.id }} {% if day.current == True %} table-active {% else %} not-current {% endif %}">
+    class="text-center day-td day-{{ day.id }} {% if day.current == True %} table-active {% else %} not-current {% endif %}">
       {{ date|date:"D, j.n"  }}
   </td>
 
