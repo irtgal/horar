@@ -1,7 +1,3 @@
-
-
-
-
 <div class="text-center mb-1"><i class="fas fa-caret-up text-center" id="load-up"></i></div>
 <div class="table-responsive">
 <table class="table mb-0">
@@ -12,17 +8,16 @@
   <td colspan="12"><div class="text-center"><b>Izmene</b></div></td>
 </tr>
 
-<!-- DAN -->
 {% for date, day in load_days.items %}
 <tr class="date">
-  <td colspan="2" class="text-center day-td {% if day.current == True %} table-active {% endif %} day-{{ day.id }}" id="{{ date|date:'Y-m-d'}}" data-day="{{ day.id }}">
+  <td colspan="2" id="{{ date|date:'Y-m-d'}}" data-day="{{ day.id }}"
+    class="day-td day-{{ day.id }} {% if day.current == True %} table-active {% else %} not-current {% endif %}">
       {{ date|date:"D, j.n"  }}
   </td>
 
-    <!-- IZMENA -->
   {% for shift in day.get_shifts %}
   <td colspan class="{{ shift.shift_class }} {% if not shift.employee %} a {% endif %} text-center shift"
-    data-class="{{ shift.shift_class }}" data-date="{{ date |date:'Y-m-d' }}" data-id="{{ shift.id }}"
+    data-class="{{ shift.shift_class }}" data-date="{{ date|date:'Y-m-d' }}" data-id="{{ shift.id }}"
       data-time="{{ shift.start|date:'H:i' }} - {{ shift.end|date:'H:i' }}"
       id="{{ shift.id }}">
     {{ shift.employee|default:"" }} <small>{{ shift.start|date:"H:i" }} - {{ shift.end|date:"H:i" }}</small>

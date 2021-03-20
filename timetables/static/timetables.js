@@ -1,26 +1,24 @@
 
 
-
+//izracunaj širino izmen
 var dates = $(".date");
 var i;
 for (i = 0; i < dates.length; i++) {
   var shifts = $(dates[i]).find(".shift");
-  var span = Math.floor(12/shifts.length);
+  var span = Math.floor(12 / shifts.length);
   if (0 < span && span < 13){
     $(shifts).attr("colspan", span);
   }
 }
 
 
-
-// obarvani tedni
 function colorWeeks(e){
     var first_mon = $(".day-td:contains('Mon')")[0].closest(".date");
+    $(first_mon).find(".day-td").addClass("co-blue");
     var days = $(first_mon).nextAll();
     var original_len = days.length;
-    $(first_mon).find(".day-td").addClass("co-blue");
     for (i = 0; i < days.length; i++) {
-        if (Math.floor((i+1)/7)%2 == 0) {
+        if (Math.floor((i+1)/7) % 2 == 0) {
             $(days[i]).find(".day-td").addClass("co-blue");
         }
         delete days[i];
@@ -34,7 +32,6 @@ $(".maybe, .yes, .no").click(function(){
   var id = $(".context").attr("id");
   var csrf = $('input[name ="csrfmiddlewaretoken"]').val();
   var url = $("#url").val() + "dodaj/";
-
 
  $.ajax({
     url: url,
@@ -181,8 +178,7 @@ $(".day-td").click(function(){
             type: 'GET',
             success: function(response) {
             var data = JSON.parse(response);
-            var absents = data[1];
-            if (data[0]==true){
+            if (data[0]){
                 $("#absents-button").removeClass("no-absent yes-absent").addClass("yes-absent");
                 $("#absents-button").html('<i class="far fa-check-circle" style="margin: 3vh;"></i>');
             }
@@ -191,14 +187,16 @@ $(".day-td").click(function(){
                 $("#absents-button").html('<i class="far fa-times-circle" style="margin: 3vh;"></i>');
             }
 
-            var context = "";
-            if (absents.length > 0) {
-              for (i = 0 ; i < absents.length; i++) {
-                 var line = '<div class="w-100 float-left bg-danger bt-1">'+ absents[i] +'</div>';
-                 $(".load-absents-container .load-absents").append(line);
+            if (data[1] != null) {
+              var absents = data[1];
+              if (absents.length > 0) {
+                for (i = 0; i < absents.length; i++) {
+                  var line = '<div class="w-100 float-left bg-danger bt-1">'+ absents[i] +'</div>';
+                  $(".load-absents-container .load-absents").append(line);
+                }
+                $(".load-absents-container .load-absents").prepend('<h6 class="text-center text-secondary">Odsotni</h6>');
               }
-              $(".load-absents-container .load-absents").prepend('<h6 class="text-center text-secondary">Odsotni</h6>');
-              }
+            }
 
             }
         });

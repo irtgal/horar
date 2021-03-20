@@ -44,6 +44,17 @@ $("#timetable-add-button").click(function(){
   $("#timetable-add-modal").modal("show");
 });
 
+function isNotObsolete(id) {
+  var clicked_date = new Date(id.replace( /(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3"))
+  var last_current = $(".table-active").first().attr('id');
+  var last_current_date = new Date(last_current.replace( /(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3"));
+  if (last_current_date > clicked_date){
+    return false
+  }
+  else {
+    return true
+  }
+}
 /* urejanje shifta */
 $(".shift").click(function(){
     $("#shift-remove").css("display", "block");
@@ -54,6 +65,7 @@ $(".shift").click(function(){
     var end = $(this).data("end");
     var id =$(this).data("id");
     var shift_class = $(this).data("class");
+    if (isNotObsolete(date)){
         $("#title-modal-edit-shift").html("Uredi " + date);
         $("#date").val(date);
         $("#edit-from").val(start);
@@ -86,12 +98,14 @@ $(".shift").click(function(){
         });
         }
     $("#modal-edit-shift").modal("show");
+  }
 });
 $("#modal-choice").on("hidden.bs.modal", function () {
     $(".load-statuses-container .load-statuses").html("<small class='text-muted'>Nalaganje</small>");
 });
 $(".day-td").click(function(){
   var date = $(this).attr("id");
+  if (isNotObsolete(date)){
   $(".load-statuses").html("");
   $("#date").val(date);
   $("#title-modal-edit-shift").html("Ustvari " + date);
@@ -102,8 +116,7 @@ $(".day-td").click(function(){
   $("#shift-remove").css("display", "none");
   if (in_turnusi){
     $("#modal-edit-shift").attr("action", "")
-  }
-  if (date && !in_turnusi) {
+  } else if (date) {
             var group = $("#group").val();
             $.ajax({
             url: '/urniki/' + group +"/urnik/absent/"+date+"/",
@@ -111,21 +124,22 @@ $(".day-td").click(function(){
             type: 'GET',
             success: function(response) {
             var data = JSON.parse(response);
-            var absents = data[1];
-            var context = "";
-            if (absents.length > 0) {
-              $(".load-absents-container .load-absents").html('<h6 class="text-center text-secondary">Ne morejo</h6>');
-              for (i = 0 ; i < absents.length; i++) {
-                 var line = '<div class="w-100 float-left bg-danger bt-1">'+ absents[i] +'</div>';
-                 $(".load-absents-container .load-absents").append(line);
+            if (data[1] != null){
+              var absents = data[1];
+              var context = "";
+              if (absents.length > 0) {
+                $(".load-absents-container .load-absents").html('<h6 class="text-center text-secondary">Ne morejo</h6>');
+                for (i = 0 ; i < absents.length; i++) {
+                  var line = '<div class="w-100 float-left bg-danger bt-1">'+ absents[i] +'</div>';
+                  $(".load-absents-container .load-absents").append(line);
+                }
+                }
               }
-              }
-
             }
         });
 
   }
-
+}
 });
 $("#modal-edit-shift").on("hidden.bs.modal", function () {
     $(".load-absents").html("");

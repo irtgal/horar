@@ -14,7 +14,7 @@
 
 {% for date, day in load_days.items %}
 <tr class="date">
-  <td colspan="2" class="text-center day-td {% if day.current == True %} table-active {% else %} co-blue {% endif %}" id="{{ date|date:'Y-m-d'}}" data-date="{{ date }}">{{ date|date:"D, j.n"  }}</i>
+  <td colspan="2" class="text-center day-td {% if day.current == True %} table-active {% else %} not-current {% endif %}" id="{{ date|date:'Y-m-d'}}" data-date="{{ date }}">{{ date|date:"D, j.n"  }}</i>
   </td>
 
   {% for shift in day.get_shifts %}
