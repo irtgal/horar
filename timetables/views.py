@@ -15,7 +15,7 @@ def login_user(request):
 	next = request.POST['next']
 	user = authenticate(username=username, password=password)
 	if (user is None or not user.is_active):
-		return render(request, 'login.html', {'error_message': 'Neveljaven vpis'})
+		return render(request, 'login.html', {'error': 'Preverite podatke'})
 	login(request, user)
 	if next !="":
 		return redirect(next)

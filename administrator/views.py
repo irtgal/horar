@@ -152,12 +152,16 @@ def shift_manage(request, group_id):
 	end = request.POST.get('edit-to')
 	user_str = request.POST.get('select-user')
 	user_id = int(user_str) if user_str else None
-	day = get_object_or_404(Day, date=date, group=group)
+
+	try:
+		day = Day.objects.get(date=date, group=group)
+	except:
+		day = Day.objects.create(date=date, group=group)
 
 	if shift_id:
 		shift = Shift.objects.get(id=shift_id, day=day)
 		if user_id > 0:
-			employee = group.users.get(id=user_id)#popravi da isce po ID
+			employee = group.users.get(id=user_id)
 			shift.employee = employee
 			shift.shift_class = "y"
 			shiftstatuses = ShiftStatus.objects.filter(shift=shift)

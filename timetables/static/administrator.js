@@ -194,6 +194,10 @@ $("#messages-submit").click(function(){
               if (data.success){
                 window.location.reload();
               }
+              else if (data.error){
+                $("#error").html(data.error);
+                $("#error").show().delay(2000).fadeOut();
+              }
 
             }
         });
