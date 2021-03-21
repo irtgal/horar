@@ -33,6 +33,9 @@
 .profile {
   flex: 1;
 }
+.nav-back:hover, .title:hover {
+  filter: brightness(0.6);
+}
 .profile .fa-user {
   font-size: 20px;
 }
