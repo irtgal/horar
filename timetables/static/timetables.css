@@ -63,7 +63,7 @@
 	color: #A0A0A0;
 }
 .yes:hover, .y:hover, .maybe:hover, .m:hover, .no:hover, .yes-absent:hover, .no-absent:hover, .maybe-absent:hover {
-	filter: brightness(90%);
+	filter: brightness(0.9);
 	cursor: pointer;
 }
 .shift:hover {
@@ -90,14 +90,14 @@
 	cursor: pointer;
 }
 .timetable_delete:hover {
-	filter: brightness(50%);
+	filter: brightness(0.5);
 }
 .delete-timetable:hover {
-	filter: brightness(50%);
+	filter: brightness(0.5);
 	cursor: pointer;
 }
 #modal-confirm {
-	filter: brightness(100%);
+	filter: brightness(1);
 }
 .status:nth-child(odd) {
 	border-left: 2px white solid;
@@ -123,12 +123,20 @@
 #toggle-messages:hover, #load-up:hover, #load-down:hover {
   color: rgb(200,200,200);
 }
+.day-td {
+  font-weight:600;
+}
 .day-td:hover {
   cursor: pointer;
-  background-color: #f2f2f2;
+  opacity: 0.6;
  }
- .day-td {
-   font-weight:600;
+ .day-past:hover {
+   cursor: default;
+   opacity: 1;
+ }
+ .day-past ~ .shift:hover {
+   cursor: default;
+   filter: brightness(1);
  }
  .table-active {
    color: #595959;
@@ -147,12 +155,12 @@
 
 }
 #urniki-button:hover {
-   filter: brightness(90%);  
+   filter: brightness(0.9);  
    cursor: pointer;
    border: none;
 }
 .odd-week {
-  filter: brightness(60%);
+  filter: brightness(0.6);
 }
 .text-gray {
   color: rgb(210,210,210);
@@ -288,12 +296,12 @@
 }
 .clickable:hover {
     cursor: pointer;
-    filter: brightness(90%);
+    filter: brightness(0.9);
 
 }
 .hoverable:hover {
     cursor: pointer;
-    filter: brightness(90%);
+    filter: brightness(0.9);
 }
 /* fonts*/
 h1 { font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif; font-size: 24px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 26.4px; } h3 { font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 15.4px; } p { font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 20px; } blockquote { font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif; font-size: 21px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 30px; } a, td { font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif; font-size: 16px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 18.5714px; }
