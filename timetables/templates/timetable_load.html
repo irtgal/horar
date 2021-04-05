@@ -11,8 +11,11 @@
 {% for date, day in load_days.items %}
 <tr class="date">
   <td colspan="2" id="{{ date|date:'Y-m-d'}}" data-day="{{ day.id }}"
-    class="text-center day-td day-{{ day.id }} {% if day.current == True %} table-active {% elif load_direction %} day-{{ load_direction }} {% endif %}">
-      {{ date|date:"D, j.n"  }}
+    class="day-td day-{{ day.id }} {% if day.current == True %} table-active {% elif load_direction %} day-{{ load_direction }} {% endif %}">
+    <span class="flex-day">
+      <span class="flex-date">{{ date|date:"D, j.n"  }}</span>
+      {% if day.has_absent %}<i class="flex-dot fas fa-circle red-dot"></i>{% endif %}
+   </span>
   </td>
 
   {% for shift in day.get_shifts %}

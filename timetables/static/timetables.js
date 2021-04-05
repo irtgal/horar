@@ -14,12 +14,12 @@ for (i = 0; i < dates.length; i++) {
 
 function colorWeeks(e){
     var first_mon = $(".day-td:contains('Mon')")[0].closest(".date");
-    $(first_mon).find(".day-td").addClass("odd-week");
+    $(first_mon).find(".day-td").find(".flex-date").addClass("odd-week");
     var days = $(first_mon).nextAll();
     var original_len = days.length;
     for (i = 0; i < days.length; i++) {
         if (Math.floor((i+1)/7) % 2 == 0) {
-            $(days[i]).find(".day-td").addClass("odd-week");
+            $(days[i]).find(".day-td").find(".flex-date").addClass("odd-week");
         }
         delete days[i];
     }
@@ -156,7 +156,7 @@ $("#modal-edit-schedule").on("hidden.bs.modal", function () {
 $(".day-td").click(function(){
   var id = $(this).attr('id');
   if (!$(this).hasClass("day-past")){
-  var date_nice = $(this).html();
+  var date_nice = $(this).find(".flex-date").html();
   $(".modal-absent-title").html("Odsotnost na " + date_nice);
   $("#modal-absent").modal("show");
   $("#modal-absent").attr("data-day-id", id);
@@ -193,6 +193,14 @@ $(".day-td").click(function(){
         });
        }
 });
+function setAbsentDot(day, has_absent) {
+  let flex_day = $(day).find(".flex-day");
+  if (has_absent && $(day).has(".flex-dot").length == 0) {
+    $(flex_day).append('<i class="flex-dot fas fa-circle red-dot"></i>');
+  } else if (!has_absent && $(day).has(".flex-dot").length == 1) {
+    $(flex_day).find(".flex-dot").remove();
+  }
+}
 $(".yes-absent, .no-absent").click(function(){
   var day_id = $("#modal-absent").attr("data-day-id");
   var day = $("#"+day_id);
@@ -209,13 +217,18 @@ $(".yes-absent, .no-absent").click(function(){
     type: 'post',
     cache: false,
 
-    success:function(data){
+    success:function(response){
       $("#success").html("Zabele&zcaron;eno");
       $("#success").show().delay(700).fadeOut();
 
       $("#modal-absent").modal("hide");
-      if (data){
-      shifts = JSON.parse(data);
+      if (response){
+      let data = JSON.parse(response);
+      let shifts = data.shifts;
+      let has_absent = data.has_absent;
+
+      setAbsentDot(day, has_absent);
+
       days = $(day).nextAll();
       for (i = 0; i < shifts.length; i++) {
            var time = $(days[i]).data("time");

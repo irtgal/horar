@@ -126,6 +126,8 @@
 #toggle-messages:hover, #load-up:hover, #load-down:hover {
   color: rgb(200,200,200);
 }
+
+
 .day-td {
   font-weight:600;
 }
@@ -150,7 +152,37 @@
  .day-future {
    color: #f1b25b;
  }
-#urniki-button {
+ .flex-day {
+  display: flex; 
+ }
+.flex-date {
+  flex: 10;
+  text-align: center;
+}
+.flex-dot {
+  flex: 1;
+  align-self: center;
+  margin-left: -0.5rem;
+}
+.odd-week {
+  filter: brightness(0.6);
+}
+.red-dot {
+  font-size: 0.5rem;
+  color: #d9534f;
+}
+@media (max-width: 1000px) {
+  .flex-day {
+    flex-direction: column;
+  }
+  .flex-dot {
+    margin-top: 0.5rem;
+    margin-left: 0;
+  }
+}
+
+
+ #urniki-button {
   margin-top: 3rem;
   color: white;
   border: none;
@@ -161,9 +193,6 @@
    filter: brightness(0.9);  
    cursor: pointer;
    border: none;
-}
-.odd-week {
-  filter: brightness(0.6);
 }
 .text-gray {
   color: rgb(210,210,210);
@@ -236,6 +265,7 @@
     width: 80%;
     margin: auto;
 }
+
 }
 .bt-1 {
     border-top: 1px solid white;
