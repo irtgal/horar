@@ -193,13 +193,12 @@ $(".day-td").click(function(){
         });
        }
 });
-function setAbsentDot(day, has_absent) {
+function setAbsentDot(day, absent_count) {
   let flex_day = $(day).find(".flex-day");
-  if (has_absent && $(day).has(".flex-dot").length == 0) {
-    $(flex_day).append('<i class="flex-dot fas fa-circle red-dot"></i>');
-  } else if (!has_absent && $(day).has(".flex-dot").length == 1) {
-    $(flex_day).find(".flex-dot").remove();
-  }
+  $(flex_day).find(".flex-absents").remove();
+  if (absent_count > 0) {
+    $(flex_day).append('<span class="flex-absents">'+ absent_count +'</span>');
+  } 
 }
 $(".yes-absent, .no-absent").click(function(){
   var day_id = $("#modal-absent").attr("data-day-id");
@@ -225,9 +224,9 @@ $(".yes-absent, .no-absent").click(function(){
       if (response){
       let data = JSON.parse(response);
       let shifts = data.shifts;
-      let has_absent = data.has_absent;
+      let absent_count = data.absent_count;
 
-      setAbsentDot(day, has_absent);
+      setAbsentDot(day, absent_count);
 
       days = $(day).nextAll();
       for (i = 0; i < shifts.length; i++) {

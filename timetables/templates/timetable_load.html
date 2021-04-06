@@ -14,7 +14,7 @@
     class="day-td day-{{ day.id }} {% if day.current == True %} table-active {% elif load_direction %} day-{{ load_direction }} {% endif %}">
     <span class="flex-day">
       <span class="flex-date">{{ date|date:"D, j.n"  }}</span>
-      {% if day.has_absent %}<i class="flex-dot fas fa-circle red-dot"></i>{% endif %}
+      {% if day.absents > 0 %}<span class="flex-absents">{{ day.absents }}</span>{% endif %}
    </span>
   </td>
 

@@ -152,8 +152,8 @@ def absent(request, group_id):
 			if shift.employee == user:
 				update_shift(group, shift)
 
-	has_absent = day.has_absent()
-	data = {"has_absent": has_absent, "shifts": get_shift_users(day)}
+	absent_count = day.absents()
+	data = {"absent_count": absent_count, "shifts": get_shift_users(day)}
 	data_json = json.dumps(data)
 	return JsonResponse(data_json, safe=False)
 	

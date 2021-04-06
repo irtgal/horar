@@ -58,8 +58,8 @@ class Day(models.Model):
 		last_current = Day.objects.filter(group=self.group, current=True).order_by("-date")[0]
 		return True if self.date < last_current.date else False
 	
-	def has_absent(self):
-		return len(DayAbsent.objects.filter(day=self)) > 0
+	def absents(self):
+		return len(DayAbsent.objects.filter(day=self)) 
 
 
 

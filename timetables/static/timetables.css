@@ -154,30 +154,32 @@
  }
  .flex-day {
   display: flex; 
+  justify-content: center;
+  align-items: center;
  }
 .flex-date {
   flex: 10;
   text-align: center;
+  justify-self: center;
 }
-.flex-dot {
+.flex-absents {
   flex: 1;
-  align-self: center;
-  margin-left: -0.5rem;
+  color: #da5c58;
+  font-size: 0.8rem;
+  font-weight: 7000;
+  margin-left: -0.8rem;
 }
 .odd-week {
   filter: brightness(0.6);
-}
-.red-dot {
-  font-size: 0.5rem;
-  color: #d9534f;
 }
 @media (max-width: 1000px) {
   .flex-day {
     flex-direction: column;
   }
-  .flex-dot {
+  .flex-absents {
     margin-top: 0.5rem;
     margin-left: 0;
+    margin: 0.3rem 0 -0.3rem 0;
   }
 }
 
