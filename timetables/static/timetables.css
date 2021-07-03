@@ -196,6 +196,11 @@
    cursor: pointer;
    border: none;
 }
+.change {
+  text-align: center;
+  font-size: 15px;
+  border:  1px solid #D2D2D2;
+}
 .text-gray {
   color: rgb(210,210,210);
 }

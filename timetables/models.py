@@ -107,4 +107,11 @@ class Message(models.Model):
 		return str(self.group) + " - " + str(self.user) + " - " + str(self.text)
 
 
+class Change(models.Model):
+	group = models.ForeignKey(Group, null=True, on_delete=models.CASCADE)
+	text = models.CharField(max_length=255)
+	user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+	date = models.DateTimeField(auto_now_add=True, null=True)
 
+	def __str__(self):
+    		return f"CHANGE: {self.group} - {self.user} - {self.date}"

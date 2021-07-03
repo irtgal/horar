@@ -25,6 +25,9 @@ class DayAdmin(admin.ModelAdmin):
 class DayAbsentAdmin(admin.ModelAdmin):
 	list_display = ['__str__']
 
+class ChangeAdmin(admin.ModelAdmin):
+    	list_display = ['__str__']
+
 admin.site.register(Shift, ShiftAdmin)
 admin.site.register(Administrator, AdministratorAdmin)
 admin.site.register(Group, GroupAdmin)
@@ -32,3 +35,4 @@ admin.site.register(Message, MessageAdmin)
 admin.site.register(Day, DayAdmin)
 admin.site.register(ShiftStatus, ShiftStatusAdmin)
 admin.site.register(DayAbsent, DayAbsentAdmin)
+admin.site.register(Change, ChangeAdmin)

@@ -1,4 +1,26 @@
+var has_changed = false;
+window.addEventListener("beforeunload", function(event) {
+  if (is_urnik() && has_changed) {
+    note_change();
+    }
+});
+function is_urnik() {
+  let path = window.location.pathname;
+  let path_array = path.split("/");
+  let last_el = path_array[path_array.length -2];
+  return last_el == "urnik"; 
+}
+function note_change() {
+  let csrf = $('input[name ="csrfmiddlewaretoken"]').val();
+  let group = $("#group").val();
+  let url = "/urniki/"+group+"/urnik/note_change/";
+  $.ajax({
+    url: url,
+    datatype: 'json',
+    type: 'GET',
+});
 
+}
 
 //izracunaj širino izmen
 var dates = $(".date");
@@ -23,7 +45,6 @@ function colorWeeks(e){
         }
         delete days[i];
     }
-
     }
 
 
@@ -44,6 +65,7 @@ $(".maybe, .yes, .no").click(function(){
     cache: false,
 
     success:function(data){
+      has_changed = true;
       if (data.shift_class){
         $("#modal-choice").modal("hide");
         var element = $("#"+id);
@@ -94,6 +116,7 @@ $(".shift").click(function(){
               $(".n-user").css("background-color", "#DC3545");
               $(".m-user").css("background-color", "#f5c88a");
               $(".y-user").css("background-color", "#AFCFB7");
+              has_changed = true;
 
             }
         });
@@ -217,6 +240,7 @@ $(".yes-absent, .no-absent").click(function(){
     cache: false,
 
     success:function(response){
+      has_changed = true;
       $("#success").html("Zabele&zcaron;eno");
       $("#success").show().delay(700).fadeOut();
 

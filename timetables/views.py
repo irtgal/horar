@@ -2,6 +2,8 @@ from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.core import serializers
+from datetime import datetime, timedelta
+
 
 
 from .scripts import *
@@ -42,9 +44,10 @@ def group_index(request, group_id):
 	check_user(request, group)
 	administrator = group.administrator.user.username
 	messages = Message.objects.filter(group=group).order_by('-date')
+	changes = Change.objects.filter(group=group).order_by('-date')[:5]
 	finnished = "finnished" if group.finnished == True else None
 	users = group.users.all()
-	context = {'group': group, 'users': users, 'messages': messages, 'administrator': administrator,'finnished': finnished}
+	context = {'group': group, 'users': users, 'messages': messages, 'changes': changes, 'administrator': administrator,'finnished': finnished}
 	return render(request, 'group_index.html', context)
 
 
@@ -176,3 +179,17 @@ def get_absent(request, group_id, date):
 
 	context = json.dumps([am_absent, users])
 	return JsonResponse(context, safe=False)
+
+@login_required
+def note_change(request, group_id):
+	check_user(request, group_id)
+	group = get_object_or_404(Group, id=group_id)
+	user = request.user
+	time_threshold = datetime.datetime.now() - timedelta(minutes=5)
+	similar_changes = Change.objects.filter(group=group, user=user, date__gt=time_threshold)
+	text = "je urejal/a urnik"
+	if not similar_changes:
+		change = Change(group=group, user=user,text=text)
+		change.save()
+	return JsonResponse({"noted": True}, safe=False)
+

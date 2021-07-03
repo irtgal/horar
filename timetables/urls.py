@@ -19,7 +19,8 @@ urlpatterns = [
 
 	url(r'^(?P<group_id>\d+)/urnik/absent/$', views.absent, name="absent"),
 	url(r'^(?P<group_id>\d+)/urnik/absent/(?P<date>\d{4}-\d{2}-\d{2})/$', views.get_absent, name="get_absent"),
-
+	
+	url(r'^(?P<group_id>\d+)/urnik/note_change/$', views.note_change, name="note_change"),
 
 
 ]

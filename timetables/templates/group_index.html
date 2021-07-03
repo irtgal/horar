@@ -54,8 +54,30 @@
   {% endif %} 
 </div>     
 
-<!-- Sporočila -->
+<!-- AKTIVNOST -->
 <div class="col-sm-6">
+  <div class="h1-group">
+    <h2 class="text-center">Aktivnost</h2>
+  </div>
+
+  <div id="changes-div">
+    {% for change in changes %}   
+      <div class="change my-1 py-2">
+        <strong class="text-info">{{ change.user }}</strong> <small>{{ change.text}}</small> <small class="text-muted">{{ change.date|date:"d.m.Y H:i" }}</small>
+      </div>
+    {% endfor %}
+  </div>
+  
+
+<div class="text-center">
+   <!-- <a  id="toggle-messages"><i class="fas fa-caret-down text-center"></i></a>-->
+</div>
+
+ </div> 
+
+
+<!-- SPOROCILA -->
+<div class="col-sm-6 mt-4">
   <div class="h1-group">
     <h2 class="text-center">Sporočila</h2>
   </div>
@@ -84,7 +106,8 @@
 
  </div>  
 
-<div class="col-sm-12 mt-4">
+<!-- EKIPA -->
+<div class="col-sm-6 mt-4">
   <div class="h1-group">
     <h2 class="text-center">Ekipa</h2>
   </div>
