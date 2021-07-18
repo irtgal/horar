@@ -11,7 +11,8 @@
 {% for date, day in load_days.items %}
 <tr class="date">
   <td colspan="2" id="{{ date|date:'Y-m-d'}}" data-day="{{ day.id }}"
-    class="day-td day-{{ day.id }} {% if day.current == True %} table-active {% elif load_direction %} day-{{ load_direction }} {% endif %}">
+    class="day-td day-{{ day.id }}
+     {% if day.current == True %} table-active {% elif load_direction %} day-{{ load_direction }} {% endif %}">
     <span class="flex-day">
       <span class="flex-date">{{ date|date:"D, j.n"  }}</span>
       {% if day.absents > 0 %}<span class="flex-absents">{{ day.absents }}</span>{% endif %}
@@ -23,7 +24,8 @@
     data-class="{{ shift.shift_class }}" data-date="{{ date|date:'Y-m-d' }}" data-id="{{ shift.id }}"
       data-time="{{ shift.start|date:'H:i' }} - {{ shift.end|date:'H:i' }}"
       id="{{ shift.id }}">
-    {{ shift.employee|default:"" }} <small>{{ shift.start|date:"H:i" }} - {{ shift.end|date:"H:i" }}</small>
+    <span>{{ shift.employee|default:"" }}<span>
+    <span><small>{{ shift.start|date:"H:i" }} - {{ shift.end|date:"H:i" }}</small></span>
     </td>
 
     {% endfor %}

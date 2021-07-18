@@ -60,6 +60,7 @@
 .shift {
 	border-left: 2px solid #FFFFFF;
 	border-bottom: 1.5px solid #FFFFFF;
+  vertical-align: middle !important;
 }
 
 .grey {
