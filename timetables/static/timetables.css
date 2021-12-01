@@ -237,10 +237,6 @@
 .box-user, a {
   margin: 10px;
 }
-.login-container {
-    width: 50vh;
-    margin: auto;
-}
 #logout {
   font-size: 50px;
   cursor: pointer;
@@ -272,10 +268,6 @@
   #data {
   	text-align: center;
   }
-.login-container {
-    width: 80%;
-    margin: auto;
-}
 
 }
 .bt-1 {

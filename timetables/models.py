@@ -21,7 +21,7 @@ class Administrator(models.Model):
 
 
 class Group(models.Model):
-    administrator = models.OneToOneField(Administrator, on_delete=models.CASCADE, unique=False)
+    administrator = models.ForeignKey(Administrator, on_delete=models.CASCADE, unique=False)
     users = models.ManyToManyField(User)
     name = models.CharField(max_length=255, default="")
     finnished = models.BooleanField(default=False)
